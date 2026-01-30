@@ -13,7 +13,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
 	title: "AniVouch",
-	description: "AniVouch - Track your anime watching habits with ease with features like watch-lists, already watched lists, and personalized recommendations.",
+	description:
+		"AniVouch - Track your anime watching habits with ease with features like watch-lists, already watched lists, and personalized recommendations.",
 };
 
 export default function RootLayout({
