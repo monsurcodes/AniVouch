@@ -16,8 +16,14 @@ export const auth = betterAuth({
 		},
 	}),
 
-	// auth configuration
+	// backend configuration
 	baseURL: process.env.BETTER_AUTH_URL,
+	trustedOrigins:
+		process.env.NODE_ENV === "production"
+			? [process.env.WEB_FRONTEND_URL!, process.env.EXPO_FRONTEND_URL!].filter(Boolean)
+			: undefined,
+
+	// auth configuration
 	emailAndPassword: {
 		enabled: true,
 	},
