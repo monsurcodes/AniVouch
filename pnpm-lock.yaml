@@ -35,6 +35,9 @@ importers:
       '@neondatabase/serverless':
         specifier: ^1.0.2
         version: 1.0.2
+      '@repo/types':
+        specifier: workspace:^
+        version: link:../../packages/types
       better-auth:
         specifier: ^1.4.18
         version: 1.4.18(drizzle-kit@0.31.8)(drizzle-orm@0.45.1(@neondatabase/serverless@1.0.2)(@types/pg@8.16.0)(kysely@0.28.10))(next@16.1.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -81,6 +84,9 @@ importers:
 
   apps/web:
     dependencies:
+      '@repo/types':
+        specifier: workspace:^
+        version: link:../../packages/types
       next:
         specifier: 16.1.0
         version: 16.1.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
