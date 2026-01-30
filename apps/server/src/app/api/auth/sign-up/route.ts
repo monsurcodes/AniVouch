@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 		if (error instanceof APIError) {
 			return NextResponse.json({ error: error.message }, { status: error.statusCode || 500 });
 		}
-		console.error(error)
+		console.error(error);
 		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 	}
 }

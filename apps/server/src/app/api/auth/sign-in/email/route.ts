@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 	}
 
 	const { email, password } = result.data;
-	
+
 	try {
 		const response = await auth.api.signInEmail({
 			body: {
