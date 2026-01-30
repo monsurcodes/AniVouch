@@ -18,13 +18,18 @@
 		},
 		"lint": {
 			"dependsOn": ["^lint"],
+			"inputs": ["$TURBO_DEFAULT$", "../../packages/eslint-config/**"],
+			"outputs": [],
 			"env": ["BETTER_AUTH_URL", "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET"]
 		},
 		"format": {
-			"inputs": ["$TURBO_DEFAULT$", ".prettierrc", ".prettierignore"]
+			"inputs": ["$TURBO_DEFAULT$", ".prettierrc", ".prettierignore"],
+			"outputs": []
 		},
 		"check-types": {
-			"dependsOn": ["^check-types"]
+			"dependsOn": ["^check-types"],
+			"inputs": ["$TURBO_DEFAULT$", "../../packages/typescript-config/**"],
+			"outputs": []
 		},
 		"dev": {
 			"cache": false,
