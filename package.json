@@ -9,7 +9,11 @@
     "check-types": "turbo run check-types"
   },
   "devDependencies": {
+    "eslint-config-prettier": "^10.1.1",
+    "globals": "^16.5.0",
+    "jiti": "^2.6.1",
     "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "turbo": "^2.8.0",
     "typescript": "5.9.2"
   },
