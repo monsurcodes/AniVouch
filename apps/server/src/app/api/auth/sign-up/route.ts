@@ -1,12 +1,18 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { APIError } from "better-auth/api";
+import { emailSignUpSchema } from "@repo/types/src/schemas/authValidation";
 
 export async function POST(request: Request) {
-	const { name, email, password } = await request.json();
-	if (!name || !email || !password) {
-		return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+	const body = await request.json();
+
+	const result = emailSignUpSchema.safeParse(body);
+
+	if (!result.success) {
+		return NextResponse.json({ error: result.error.flatten().fieldErrors }, { status: 400 });
 	}
+
+	const { name, email, password } = result.data;
 
 	try {
 		const response = await auth.api.signUpEmail({
@@ -23,6 +29,7 @@ export async function POST(request: Request) {
 		if (error instanceof APIError) {
 			return NextResponse.json({ error: error.message }, { status: error.statusCode || 500 });
 		}
+		console.error(error)
 		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
 	}
 }
