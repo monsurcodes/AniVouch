@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse, type NextRequest } from "next/server";
-import { APIError } from "better-auth/api";
+import { handleError, AppError } from "@/lib/error-handler";
 
 export async function GET(request: NextRequest) {
 	const { searchParams } = request.nextUrl;
@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 	const callbackURL = searchParams.get("callbackURL");
 
 	if (!token) {
-		return NextResponse.json({ error: "Missing token" }, { status: 400 });
+		return handleError(new AppError("Token is required", 400));
 	}
 
 	try {
@@ -21,17 +21,10 @@ export async function GET(request: NextRequest) {
 			asResponse: true,
 		});
 		if (!response.status) {
-			return NextResponse.json(
-				{ error: "Failed to verify email" },
-				{ status: response.status }
-			);
+			return handleError(new AppError("Failed to verify email", response.status));
 		}
 		return NextResponse.json({ message: "Email verified successfully" }, { status: 200 });
 	} catch (error) {
-		if (error instanceof APIError) {
-			return NextResponse.json({ error: error.message }, { status: error.statusCode || 500 });
-		}
-		console.error(error);
-		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+		return handleError(error);
 	}
 }

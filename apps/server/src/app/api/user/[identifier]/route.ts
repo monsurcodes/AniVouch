@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { user as userTable } from "@/db/schemas/auth-schema";
 import { eq, or } from "drizzle-orm";
+import { handleError, AppError } from "@/lib/error-handler";
 
 export async function GET(
 	request: Request,
@@ -10,7 +11,7 @@ export async function GET(
 	const { identifier } = await params;
 
 	if (!identifier) {
-		return NextResponse.json({ error: "Identifier is required" }, { status: 400 });
+		return handleError(new AppError("Identifier is required", 400));
 	}
 
 	try {
@@ -30,14 +31,11 @@ export async function GET(
 				)
 			);
 		if (result.length === 0) {
-			return NextResponse.json({ error: "User not found" }, { status: 404 });
+			return handleError(new AppError("User not found", 404));
 		}
 		const user = result[0];
 		return NextResponse.json({ data: user }, { status: 200 });
 	} catch (error) {
-		if (error instanceof Error) {
-			return NextResponse.json({ error: error.message }, { status: 500 });
-		}
-		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+		return handleError(error);
 	}
 }

@@ -1,13 +1,13 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-utils";
-import { APIError } from "better-auth/api";
 import { env } from "@/lib/env";
+import { handleError, AppError } from "@/lib/error-handler";
 
 export async function GET() {
 	const { user } = await getCurrentUser();
 	if (!user) {
-		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+		return handleError(new AppError("Unauthorized", 401));
 	}
 
 	try {
@@ -20,17 +20,10 @@ export async function GET() {
 		});
 
 		if (!response.status) {
-			return NextResponse.json(
-				{ error: "Failed to send verification email" },
-				{ status: response.status }
-			);
+			return handleError(new AppError("Failed to send verification email", response.status));
 		}
 		return NextResponse.json({ message: "Verification email sent" }, { status: 200 });
 	} catch (error) {
-		if (error instanceof APIError) {
-			return NextResponse.json({ error: error.message }, { status: error.statusCode || 500 });
-		}
-		console.error(error);
-		return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+		return handleError(error);
 	}
 }
