@@ -4,6 +4,8 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth-schema";
 import { sendVerificationEmail as sVE } from "./nodemailer-utils";
+import bcrypt from "bcrypt";
+import { env } from "./env";
 
 export const auth = betterAuth({
 	// database adapter using Drizzle ORM
@@ -18,10 +20,10 @@ export const auth = betterAuth({
 	}),
 
 	// backend configuration
-	baseURL: process.env.BETTER_AUTH_URL,
+	baseURL: env.BETTER_AUTH_URL,
 	trustedOrigins:
-		process.env.NODE_ENV === "production"
-			? [process.env.WEB_FRONTEND_URL!, process.env.EXPO_FRONTEND_URL!].filter(Boolean)
+		env.NODE_ENV === "production"
+			? [env.WEB_FRONTEND_URL!, env.EXPO_FRONTEND_URL!].filter(Boolean)
 			: undefined,
 
 	// email verification configuration
@@ -35,12 +37,20 @@ export const auth = betterAuth({
 	// auth configuration
 	emailAndPassword: {
 		enabled: true,
+		password: {
+			hash: async (password) => {
+				return bcrypt.hash(password, 8);
+			},
+			verify: async ({ hash, password }) => {
+				return bcrypt.compare(password, hash);
+			},
+		},
 	},
 	socialProviders: {
 		google: {
 			prompt: "select_account",
-			clientId: process.env.GOOGLE_CLIENT_ID as string,
-			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+			clientId: env.GOOGLE_CLIENT_ID,
+			clientSecret: env.GOOGLE_CLIENT_SECRET,
 		},
 	},
 	plugins: [username()],

@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { APIError } from "better-auth/api";
+import { env } from "@/lib/env";
 
 export async function GET() {
 	const { user } = await getCurrentUser();
@@ -13,7 +14,7 @@ export async function GET() {
 		const response = await auth.api.sendVerificationEmail({
 			body: {
 				email: user.email,
-				callbackURL: `${process.env.WEB_FRONTEND_URL}`,
+				callbackURL: env.WEB_FRONTEND_URL,
 			},
 			asResponse: true,
 		});
