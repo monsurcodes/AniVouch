@@ -26,7 +26,25 @@ export async function POST(request: Request) {
 
 	const username = result.data;
 
+	if (username === user.username) {
+		return NextResponse.json(
+			{ message: "Username is the same as the current one" },
+			{ status: 200 }
+		);
+	}
+
 	try {
+		const existingUsername = await db
+			.select({
+				username: userTable.username,
+			})
+			.from(userTable)
+			.where(eq(userTable.username, username));
+
+		if (existingUsername.length > 0) {
+			return NextResponse.json({ error: "Username is already taken" }, { status: 409 });
+		}
+
 		await db.update(userTable).set({ username }).where(eq(userTable.id, user.id));
 		return NextResponse.json({ message: "Username updated successfully" }, { status: 200 });
 	} catch (error) {
