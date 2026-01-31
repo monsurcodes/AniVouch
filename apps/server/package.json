@@ -13,6 +13,7 @@
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
     "@repo/types": "workspace:^",
+    "bcrypt": "^6.0.0",
     "better-auth": "^1.4.18",
     "dotenv": "^17.2.3",
     "drizzle-orm": "^0.45.1",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@repo/eslint-config": "workspace:^",
     "@repo/typescript-config": "workspace:^",
+    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/nodemailer": "^7.0.9",
     "@types/react": "^19",
