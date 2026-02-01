@@ -1,2 +1,2 @@
-export { sendVerificationEmail } from "./templates";
+export { sendVerificationEmail, sendPasswordResetOTP } from "./templates";
 export { default as transporter } from "./transporter";
