@@ -7,5 +7,8 @@
 		"anivouch-monorepo/.vscode/mcp.json: drizzle-orm Docs": {
 			"allowedModels": ["copilot/auto"]
 		}
+	},
+	"[markdown]": {
+		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
 	}
 }
