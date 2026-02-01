@@ -3,9 +3,9 @@ import { db } from "@/db";
 import { user as userTable } from "@/db/schemas/auth-schema";
 import { eq } from "drizzle-orm";
 import { usernameValidation } from "@repo/types/src/schemas/authValidation";
-import { getCurrentUser } from "@/lib/auth-utils";
-import { handleError, AppError } from "@/lib/error-handler";
-import { withRetry } from "@/lib/db-utils";
+import { getCurrentUser } from "@/lib/auth";
+import { handleError, AppError } from "@/lib/utils";
+import { withRetry } from "@/db/utils";
 
 export async function POST(request: Request) {
 	const { user } = await getCurrentUser();

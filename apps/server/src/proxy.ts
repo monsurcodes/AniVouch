@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { rateLimit } from "@/lib/rate-limit";
-import { env } from "@/lib/env";
+import { rateLimit } from "@/lib/utils";
+import { env } from "@/lib/config";
 
 const limiter = rateLimit({ windowMs: 60000, max: 100 });
 const authLimiter = rateLimit({ windowMs: 60000, max: 10 });

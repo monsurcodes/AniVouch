@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { handleError } from "@/lib/error-handler";
+import { handleError } from "@/lib/utils";
 
 export async function GET(request: Request) {
 	try {

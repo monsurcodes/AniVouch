@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { handleError } from "@/lib/error-handler";
+import { handleError } from "@/lib/utils";
 
 export async function POST() {
 	try {

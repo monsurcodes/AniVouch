@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { emailSignInSchema } from "@repo/types/src/schemas/authValidation";
-import { handleError } from "@/lib/error-handler";
+import { handleError } from "@/lib/utils";
 
 export async function POST(request: Request) {
 	const body = await request.json();

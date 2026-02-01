@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getCurrentUser } from "@/lib/auth-utils";
-import { handleError, AppError } from "@/lib/error-handler";
+import { getCurrentUser } from "@/lib/auth";
+import { handleError, AppError } from "@/lib/utils";
 
 export async function GET() {
 	try {

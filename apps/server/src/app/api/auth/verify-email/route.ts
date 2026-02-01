@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse, type NextRequest } from "next/server";
-import { handleError, AppError } from "@/lib/error-handler";
+import { handleError, AppError } from "@/lib/utils";
 
 export async function GET(request: NextRequest) {
 	const { searchParams } = request.nextUrl;
