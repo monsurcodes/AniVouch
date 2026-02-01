@@ -69,31 +69,31 @@ import { env } from "@/lib/config/env";
 
 - **Purpose**: Authentication configuration & helpers
 - **Files**:
-    - `config.ts` - BetterAuth setup with Drizzle adapter
-    - `helpers.ts` - `getCurrentUser()` for session management
+  - `config.ts` - BetterAuth setup with Drizzle adapter
+  - `helpers.ts` - `getCurrentUser()` for session management
 - **Exports**: `auth`, `getCurrentUser`
 
 ### `/lib/config/`
 
 - **Purpose**: Application-wide configuration
 - **Files**:
-    - `env.ts` - Zod-validated environment variables
+  - `env.ts` - Zod-validated environment variables
 - **Exports**: `env`
 
 ### `/lib/utils/`
 
 - **Purpose**: Shared utilities used across the app
 - **Files**:
-    - `logger.ts` - Logging service with dev/prod modes
-    - `error-handler.ts` - Global error handler with DB error mapping
-    - `rate-limit.ts` - In-memory rate limiting
+  - `logger.ts` - Logging service with dev/prod modes
+  - `error-handler.ts` - Global error handler with DB error mapping
+  - `rate-limit.ts` - In-memory rate limiting
 - **Exports**: `logger`, `handleError`, `AppError`, `rateLimit`
 
 ### `/db/utils/`
 
 - **Purpose**: Database-specific utilities
 - **Files**:
-    - `helpers.ts` - Retry logic, transactions, error type guards
+  - `helpers.ts` - Retry logic, transactions, error type guards
 - **Exports**: `withRetry`, `executeTransaction`, `isDatabaseError`, `isUniqueViolation`, `isForeignKeyViolation`
 - **Why separate?**: Database utilities depend on `@/db` instance
 
@@ -101,8 +101,8 @@ import { env } from "@/lib/config/env";
 
 - **Purpose**: Email service integration
 - **Files**:
-    - `transporter.ts` - Nodemailer SMTP configuration
-    - `templates.ts` - Handlebars template compilation & sending
+  - `transporter.ts` - Nodemailer SMTP configuration
+  - `templates.ts` - Handlebars template compilation & sending
 - **Exports**: `sendVerificationEmail`, `transporter`
 
 ## ✨ Benefits of This Structure
@@ -160,7 +160,7 @@ lib/auth/
 
 ## 🔄 Migration Summary
 
-### Files Moved:
+### Files Moved
 
 - `lib/auth.ts` → `lib/auth/config.ts`
 - `lib/auth-utils.ts` → `lib/auth/helpers.ts`
@@ -172,7 +172,7 @@ lib/auth/
 - `lib/nodemailer.ts` → `services/email/transporter.ts`
 - `lib/nodemailer-utils.ts` → `services/email/templates.ts`
 
-### Barrel Exports Added:
+### Barrel Exports Added
 
 - `lib/index.ts` - Re-exports all lib modules
 - `lib/auth/index.ts` - Auth module exports
@@ -181,7 +181,7 @@ lib/auth/
 - `db/utils/index.ts` - DB utility exports
 - `services/email/index.ts` - Email service exports
 
-### All Imports Updated:
+### All Imports Updated
 
 ✅ API routes updated
 ✅ Core services updated
