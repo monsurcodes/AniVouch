@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 import { APIError } from "better-auth/api";
 import { ZodError, flattenError } from "zod";
 import { NeonDbError } from "@neondatabase/serverless";
-import { logger } from "./logger";
-import { env } from "./env";
+import { logger } from "@/lib/utils/logger";
+import { env } from "@/lib/config/env";
 
 // Postgres error codes for better type safety
 const PG_ERROR_CODES = {

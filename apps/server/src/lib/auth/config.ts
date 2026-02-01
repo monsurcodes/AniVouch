@@ -3,9 +3,9 @@ import { username } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth-schema";
-import { sendVerificationEmail as sVE } from "./nodemailer-utils";
+import { sendVerificationEmail } from "@/services/email";
 import bcrypt from "bcrypt";
-import { env } from "./env";
+import { env } from "../config";
 
 export const auth = betterAuth({
 	// database adapter using Drizzle ORM
@@ -30,7 +30,7 @@ export const auth = betterAuth({
 	emailVerification: {
 		sendOnSignUp: true,
 		sendVerificationEmail: async ({ user, url }) => {
-			await sVE(user.email, url);
+			await sendVerificationEmail(user.email, url);
 		},
 	},
 

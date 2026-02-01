@@ -1,9 +1,9 @@
-import transporter from "./nodemailer";
+import transporter from "./transporter";
 import type { SendMailOptions, SentMessageInfo } from "nodemailer";
 import fs from "fs/promises";
 import handlebars from "handlebars";
 import path from "path";
-import { env } from "./env";
+import { env } from "@/lib";
 
 const templateCache = new Map<string, HandlebarsTemplateDelegate>();
 

@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
-import { logger } from "./logger";
-import { env } from "./env";
+import { logger } from "@/lib";
+import { env } from "@/lib";
 
 const transporter = nodemailer.createTransport({
 	host: "smtp-relay.brevo.com",

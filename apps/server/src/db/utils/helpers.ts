@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { logger } from "./logger";
+import { logger } from "@/lib";
 
 /**
  * Type guard to check if an error is a database error with a code

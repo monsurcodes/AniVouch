@@ -1,4 +1,4 @@
-import { env } from "./env";
+import { env } from "../config";
 
 type LogLevel = "info" | "warn" | "error" | "debug";
 
