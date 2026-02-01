@@ -8,9 +8,6 @@
 			"allowedModels": ["copilot/auto"]
 		}
 	},
-	"[markdown]": {
-		"editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
-	},
 	"editor.codeActionsOnSave": {
 		"source.fixAll.eslint": "explicit"
 	}
