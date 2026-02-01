@@ -45,3 +45,19 @@ export const sendVerificationEmail = async (
 
 	return await transporter.sendMail(mailOptions);
 };
+
+/**
+ * Service function to send password reset OTP email
+ */
+export const sendPasswordResetOTP = async (to: string, otp: string): Promise<SentMessageInfo> => {
+	const html = await getHtmlContent("password-reset-otp", { otp });
+
+	const mailOptions: SendMailOptions = {
+		from: `"AniVouch" <${env.SMTP_SENDER_EMAIL}>`,
+		to,
+		subject: "Password Reset OTP for AniVouch",
+		html,
+	};
+
+	return await transporter.sendMail(mailOptions);
+};
