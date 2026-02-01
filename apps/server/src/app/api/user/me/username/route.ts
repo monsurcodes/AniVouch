@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 import { usernameValidation } from "@repo/types/src/schemas/authValidation";
 import { getCurrentUser } from "@/lib/auth-utils";
 import { handleError, AppError } from "@/lib/error-handler";
+import { withRetry } from "@/lib/db-utils";
 
 export async function POST(request: Request) {
 	const { user } = await getCurrentUser();
@@ -34,20 +35,12 @@ export async function POST(request: Request) {
 	}
 
 	try {
-		// const existingUsername = await db
-		// 	.select({
-		// 		username: userTable.username,
-		// 	})
-		// 	.from(userTable)
-		// 	.where(eq(userTable.username, username));
-
-		// if (existingUsername.length > 0) {
-		// 	return NextResponse.json({ error: "Username is already taken" }, { status: 409 });
-		// }
-
-		await db.update(userTable).set({ username }).where(eq(userTable.id, user.id));
+		await withRetry(
+			() => db.update(userTable).set({ username }).where(eq(userTable.id, user.id)),
+			{ maxRetries: 2, context: { userId: user.id, operation: "updateUsername" } }
+		);
 		return NextResponse.json({ message: "Username updated successfully" }, { status: 200 });
 	} catch (error) {
-		return handleError(error);
+		return handleError(error, { userId: user.id, requestedUsername: username });
 	}
 }
