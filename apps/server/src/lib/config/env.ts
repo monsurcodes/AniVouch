@@ -10,6 +10,7 @@ const envSchema = z.object({
 	SMTP_MAIL_USERNAME: z.email(),
 	SMTP_MAIL_PASS: z.string().min(1),
 	SMTP_SENDER_EMAIL: z.email(),
+	ANILIST_GRAPHQL_API: z.url(),
 	NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
 });
 
