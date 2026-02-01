@@ -1,5 +1,6 @@
-import { auth } from "@/lib/auth";
 import { emailSignUpSchema } from "@repo/types/src/schemas/authValidation";
+
+import { auth } from "@/lib/auth";
 import { handleError } from "@/lib/utils";
 
 export async function POST(request: Request) {

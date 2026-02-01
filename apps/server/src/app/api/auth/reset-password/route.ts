@@ -1,6 +1,7 @@
 import { passwordResetSchema } from "@repo/types/src/schemas/authValidation";
-import { handleError, getCurrentUser, AppError, auth } from "@/lib";
 import { NextResponse } from "next/server";
+
+import { handleError, getCurrentUser, AppError, auth } from "@/lib";
 
 export async function POST(request: Request) {
 	const { user } = await getCurrentUser();

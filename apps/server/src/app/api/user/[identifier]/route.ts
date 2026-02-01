@@ -1,7 +1,8 @@
+import { eq, or } from "drizzle-orm";
 import { NextResponse } from "next/server";
+
 import { db } from "@/db";
 import { user as userTable } from "@/db/schemas/auth-schema";
-import { eq, or } from "drizzle-orm";
 import { handleError, AppError } from "@/lib/utils";
 
 export async function GET(

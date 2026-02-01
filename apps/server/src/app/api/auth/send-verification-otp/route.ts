@@ -1,6 +1,7 @@
-import { auth, getCurrentUser } from "@/lib/auth";
-import { handleError, AppError } from "@/lib";
 import { NextResponse } from "next/server";
+
+import { handleError, AppError } from "@/lib";
+import { auth, getCurrentUser } from "@/lib/auth";
 
 export async function GET() {
 	const { user } = await getCurrentUser();

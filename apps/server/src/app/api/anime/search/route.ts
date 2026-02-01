@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
 import { searchAnimeSchema, SearchAnimeResult } from "@repo/types";
-import { handleError, AppError } from "@/lib/utils";
+import { NextResponse } from "next/server";
+
 import { env } from "@/lib";
+import { handleError, AppError } from "@/lib/utils";
 
 export async function POST(request: Request) {
 	const body = await request.json();

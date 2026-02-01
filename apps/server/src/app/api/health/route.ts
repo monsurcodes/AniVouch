@@ -1,6 +1,7 @@
-import { NextResponse } from "next/server";
-import { db } from "@/db";
 import { sql } from "drizzle-orm";
+import { NextResponse } from "next/server";
+
+import { db } from "@/db";
 
 export async function GET() {
 	const checks = {

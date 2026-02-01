@@ -1,6 +1,7 @@
-import { auth } from "./config";
 import { headers } from "next/headers";
 import { cache } from "react";
+
+import { auth } from "./config";
 
 export const getCurrentUser = cache(async () => {
 	const response = await auth.api.getSession({

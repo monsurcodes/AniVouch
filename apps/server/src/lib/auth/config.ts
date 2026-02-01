@@ -1,10 +1,12 @@
+import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
-import { username, emailOTP } from "better-auth/plugins";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { username, emailOTP } from "better-auth/plugins";
+
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth-schema";
 import { sendVerificationEmail, sendPasswordResetOTP } from "@/services/email";
-import bcrypt from "bcrypt";
+
 import { env } from "../config";
 
 export const auth = betterAuth({

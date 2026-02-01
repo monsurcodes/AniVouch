@@ -1,5 +1,6 @@
-import { auth } from "@/lib/auth";
 import { NextResponse, type NextRequest } from "next/server";
+
+import { auth } from "@/lib/auth";
 import { handleError, AppError } from "@/lib/utils";
 
 export async function GET(request: NextRequest) {
