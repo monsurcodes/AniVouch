@@ -2,5 +2,10 @@
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"editor.formatOnSave": true,
 	"editor.tabSize": 4,
-	"editor.insertSpaces": false
+	"editor.insertSpaces": false,
+	"chat.mcp.serverSampling": {
+		"anivouch-monorepo/.vscode/mcp.json: drizzle-orm Docs": {
+			"allowedModels": ["copilot/auto"]
+		}
+	}
 }
