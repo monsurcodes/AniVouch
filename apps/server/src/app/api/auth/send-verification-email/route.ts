@@ -9,6 +9,10 @@ export async function GET() {
 		return handleError(new AppError("Unauthorized", 401));
 	}
 
+	if (user.emailVerified) {
+		return handleError(new AppError("Email is already verified", 400));
+	}
+
 	try {
 		const response = await auth.api.sendVerificationEmail({
 			body: {
