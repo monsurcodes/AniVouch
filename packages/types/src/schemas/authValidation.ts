@@ -14,6 +14,11 @@ export const passwordValidation = z
 	.min(8, "Password must be at least 8 characters long")
 	.max(50, "Password must not exceed 50 character limit");
 
+export const otpValidation = z
+	.string()
+	.length(6, "OTP must be exactly 6 digits")
+	.regex(/^\d+$/, "OTP must contain only digits");
+
 export const emailSignUpSchema = z.object({
 	name: z.string().trim(),
 	email: emailValidation,
@@ -27,5 +32,10 @@ export const emailSignInSchema = z.object({
 
 export const usernameSignInSchema = z.object({
 	username: usernameValidation,
+	password: passwordValidation,
+});
+
+export const passwordResetSchema = z.object({
+	otp: otpValidation,
 	password: passwordValidation,
 });
