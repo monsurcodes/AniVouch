@@ -44,3 +44,6 @@ export const searchAnimeSchema = z.object({
 		])
 		.default("SCORE_DESC"),
 });
+
+// Infer types from schemas
+export type AnimeSearchInput = z.infer<typeof searchAnimeSchema>;
