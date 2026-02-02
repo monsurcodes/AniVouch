@@ -36,6 +36,7 @@ export interface AnimeTitle {
 
 /**
  * Search result for anime/manga
+ * @deprecated Use AnimeSearchResult instead
  */
 export interface SearchAnimeResult {
 	id: number;
@@ -50,6 +51,11 @@ export interface SearchAnimeResult {
 	format: MediaFormat;
 	seasonYear: number | null;
 }
+
+/**
+ * Anime search result (main export)
+ */
+export type AnimeSearchResult = SearchAnimeResult;
 
 /**
  * Type guard to check if a status is valid

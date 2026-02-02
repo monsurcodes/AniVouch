@@ -19,18 +19,18 @@ export const otpValidation = z
 	.length(6, "OTP must be exactly 6 digits")
 	.regex(/^\d+$/, "OTP must contain only digits");
 
-export const emailSignUpSchema = z.object({
-	name: z.string().trim(),
+export const signUpSchema = z.object({
+	name: z.string().trim().min(1, "Name is required"),
 	email: emailValidation,
 	password: passwordValidation,
 });
 
-export const emailSignInSchema = z.object({
+export const signInEmailSchema = z.object({
 	email: emailValidation,
 	password: passwordValidation,
 });
 
-export const usernameSignInSchema = z.object({
+export const signInUsernameSchema = z.object({
 	username: usernameValidation,
 	password: passwordValidation,
 });
@@ -39,3 +39,15 @@ export const passwordResetSchema = z.object({
 	otp: otpValidation,
 	password: passwordValidation,
 });
+
+export const passwordResetTokenSchema = z.object({
+	token: z.string().min(1, "Token is required"),
+	password: passwordValidation,
+});
+
+// Infer types from schemas
+export type SignUpInput = z.infer<typeof signUpSchema>;
+export type SignInEmailInput = z.infer<typeof signInEmailSchema>;
+export type SignInUsernameInput = z.infer<typeof signInUsernameSchema>;
+export type PasswordReset = z.infer<typeof passwordResetSchema>;
+export type PasswordResetToken = z.infer<typeof passwordResetTokenSchema>;
