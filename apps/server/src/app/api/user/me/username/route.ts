@@ -1,4 +1,4 @@
-import { usernameValidation } from "@repo/types/src/schemas/authValidation";
+import { usernameValidation } from "@repo/types";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
