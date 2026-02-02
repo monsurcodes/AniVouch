@@ -7,25 +7,31 @@
  * User object returned from API
  */
 export interface User {
-	data: {
-		id: string;
-		email: string;
-		name: string;
-		username?: string;
-		image?: string;
-		emailVerified: boolean;
-		createdAt: string;
-		updatedAt: string;
-	};
+	id: string;
+	email: string;
+	name: string;
+	username?: string;
+	image?: string;
+	emailVerified: boolean;
+	createdAt: string;
+	updatedAt: string;
 }
 
 /**
- * Authentication response
+ * Session object from better-auth
+ */
+export interface Session {
+	id: string;
+	token: string;
+	expiresAt: string;
+}
+
+/**
+ * Authentication response (sign up / sign in)
  */
 export interface AuthResponse {
 	user: User;
-	token?: string;
-	message?: string;
+	session: Session;
 }
 
 /**
