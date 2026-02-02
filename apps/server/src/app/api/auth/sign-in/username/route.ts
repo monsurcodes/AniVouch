@@ -1,4 +1,4 @@
-import { usernameSignInSchema } from "@repo/types/src/schemas/authValidation";
+import { signInUsernameSchema } from "@repo/types";
 
 import { auth } from "@/lib/auth";
 import { handleError } from "@/lib/utils";
@@ -6,7 +6,7 @@ import { handleError } from "@/lib/utils";
 export async function POST(request: Request) {
 	const body = await request.json();
 
-	const result = usernameSignInSchema.safeParse(body);
+	const result = signInUsernameSchema.safeParse(body);
 
 	if (!result.success) {
 		return handleError(result.error);

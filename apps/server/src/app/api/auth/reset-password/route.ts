@@ -1,4 +1,4 @@
-import { passwordResetSchema } from "@repo/types/src/schemas/authValidation";
+import { passwordResetSchema } from "@repo/types";
 import { NextResponse } from "next/server";
 
 import { handleError, getCurrentUser, AppError, auth } from "@/lib";
