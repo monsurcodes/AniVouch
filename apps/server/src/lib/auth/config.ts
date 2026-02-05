@@ -26,7 +26,12 @@ export const auth = betterAuth({
 	trustedOrigins:
 		env.NODE_ENV === "production"
 			? [env.WEB_FRONTEND_URL!, env.EXPO_FRONTEND_URL!].filter(Boolean)
-			: undefined,
+			: ["http://localhost:3000"],
+
+	advanced: {
+		useSecureCookies: env.NODE_ENV === "production",
+		cookiePrefix: "better-auth",
+	},
 
 	// email verification configuration
 	emailVerification: {
