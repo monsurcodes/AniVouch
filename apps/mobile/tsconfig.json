@@ -1,0 +1,18 @@
+{
+	"extends": "@repo/typescript-config/react-library.json",
+	"compilerOptions": {
+		"strict": true,
+		"skipLibCheck": true,
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+		"noEmit": true,
+		"jsx": "react-native",
+		"lib": ["ES2022"],
+		"paths": {
+			"@/*": ["./*"]
+		}
+	},
+	"include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"],
+	"exclude": ["node_modules", "app-example"]
+}
