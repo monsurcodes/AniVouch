@@ -1,7 +1,8 @@
 import { signInUsernameSchema } from "@repo/types";
+import { NextResponse } from "next/server";
 
 import { auth } from "@/lib/auth";
-import { handleError } from "@/lib/utils";
+import { AppError, handleError } from "@/lib/utils";
 
 export async function POST(request: Request) {
 	const body = await request.json();
@@ -22,7 +23,34 @@ export async function POST(request: Request) {
 			},
 			asResponse: true,
 		});
-		return response;
+
+		const data = await response.json();
+
+		// If response is not OK, return the error
+		if (!response.ok) {
+			return NextResponse.json(data, {
+				status: response.status,
+				headers: response.headers,
+			});
+		}
+
+		const token = data.session?.token || data.token;
+
+		if (!token) {
+			return handleError(new AppError("No token received from username sign-in response"));
+		}
+
+		return NextResponse.json(
+			{
+				user: data.user,
+				session: data.session,
+				token: token, // Mobile clients use this
+			},
+			{
+				status: response.status,
+				headers: response.headers,
+			}
+		);
 	} catch (error) {
 		return handleError(error);
 	}
