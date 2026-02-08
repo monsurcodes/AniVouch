@@ -1,11 +1,11 @@
 import bcrypt from "bcrypt";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { username, emailOTP } from "better-auth/plugins";
+import { bearer, emailOTP, username } from "better-auth/plugins";
 
 import { db } from "@/db";
 import * as schema from "@/db/schemas/auth-schema";
-import { sendVerificationEmail, sendPasswordResetOTP } from "@/services/email";
+import { sendPasswordResetOTP, sendVerificationEmail } from "@/services/email";
 
 import { env } from "../config";
 
@@ -25,8 +25,17 @@ export const auth = betterAuth({
 	baseURL: env.BETTER_AUTH_URL,
 	trustedOrigins:
 		env.NODE_ENV === "production"
-			? [env.WEB_FRONTEND_URL!, env.EXPO_FRONTEND_URL!].filter(Boolean)
-			: ["http://localhost:3000"],
+			? [
+					env.WEB_FRONTEND_URL!,
+					env.EXPO_FRONTEND_URL!,
+					env.MOBILE_DEEP_LINK_SCHEME + "://*",
+				].filter(Boolean)
+			: [
+					"http://localhost:3000",
+					"exp://localhost:8081", // Expo development
+					"exp://*", // All Expo development URLs
+					env.MOBILE_DEEP_LINK_SCHEME + "://*",
+				],
 
 	advanced: {
 		useSecureCookies: env.NODE_ENV === "production",
@@ -69,5 +78,6 @@ export const auth = betterAuth({
 				}
 			},
 		}),
+		bearer(),
 	],
 });
