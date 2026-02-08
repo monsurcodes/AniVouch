@@ -32,6 +32,7 @@ export interface Session {
 export interface AuthResponse {
 	user: User;
 	session: Session;
+	token?: string; // For mobile clients (redundant with session.token but convenient)
 }
 
 /**
