@@ -5,14 +5,14 @@
 
 "use client";
 
-import type { SignUpInput, SignInEmailInput } from "@repo/types";
+import type { SignInEmailInput, SignInUsernameInput, SignUpInput } from "@repo/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { authApi } from "@/lib/api";
 import { setAuthToken } from "@/lib/api/client";
-import { ROUTES, QUERY_KEYS } from "@/lib/constants";
+import { QUERY_KEYS, ROUTES } from "@/lib/constants";
 
 /**
  * Hook for user sign up
@@ -25,6 +25,10 @@ export function useSignUp() {
 		mutationFn: (data: SignUpInput) => authApi.signUp(data),
 		onSuccess: (response) => {
 			toast.success("Account created successfully!");
+			// Store token for API requests (mobile compatibility)
+			if (response.session?.token) {
+				setAuthToken(response.session.token);
+			}
 			// Update user cache
 			queryClient.setQueryData(QUERY_KEYS.USER.CURRENT, response.user);
 			// Redirect to verification
@@ -47,6 +51,36 @@ export function useSignIn() {
 		mutationFn: (data: SignInEmailInput) => authApi.signInWithEmail(data),
 		onSuccess: (response) => {
 			toast.success("Signed in successfully!");
+			// Store token for API requests (mobile compatibility)
+			if (response.session?.token) {
+				setAuthToken(response.session.token);
+			}
+			// Update user cache
+			queryClient.setQueryData(QUERY_KEYS.USER.CURRENT, response.user);
+			// Redirect to dashboard
+			router.push(ROUTES.DASHBOARD);
+		},
+		onError: (error: Error) => {
+			toast.error(error.message || "Invalid credentials");
+		},
+	});
+}
+
+/**
+ * Hook for user sign in with username
+ */
+export function useSignInWithUsername() {
+	const router = useRouter();
+	const queryClient = useQueryClient();
+
+	return useMutation({
+		mutationFn: (data: SignInUsernameInput) => authApi.signInWithUsername(data),
+		onSuccess: (response) => {
+			toast.success("Signed in successfully!");
+			// Store token for API requests (mobile compatibility)
+			if (response.session?.token) {
+				setAuthToken(response.session.token);
+			}
 			// Update user cache
 			queryClient.setQueryData(QUERY_KEYS.USER.CURRENT, response.user);
 			// Redirect to dashboard
