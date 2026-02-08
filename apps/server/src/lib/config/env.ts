@@ -5,6 +5,7 @@ const envSchema = z.object({
 	BETTER_AUTH_URL: z.url(),
 	WEB_FRONTEND_URL: z.url().optional(),
 	EXPO_FRONTEND_URL: z.url().optional(),
+	MOBILE_DEEP_LINK_SCHEME: z.string().default("anivouch"),
 	GOOGLE_CLIENT_ID: z.string().min(1),
 	GOOGLE_CLIENT_SECRET: z.string().min(1),
 	SMTP_MAIL_USERNAME: z.email(),
