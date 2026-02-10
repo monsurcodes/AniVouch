@@ -1,4 +1,4 @@
-# AniVouch
+# AniVouch (⚠️ Heavily under development)
 
 **AniVouch** is a full-stack anime community platform that integrates with the AniList API, providing users with authentication, anime browsing, and social features. Built as a modern monorepo, it includes a Next.js web application, a Next.js API server with database integration, and a React Native mobile app powered by Expo.
 
